@@ -1,0 +1,17 @@
+GET HTTP://localhost:8000/games
+
+###
+
+GET HTTP://localhost:8000/games/638d8d5e51ee5b8fb40a0d49
+
+###
+
+POST HTTP://localhost:8000/games
+Content-Type: application/json
+
+{
+    "name": "pacman",
+    "genre": "puzzle",
+    "company": "namco"
+}
+
