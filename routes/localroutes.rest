@@ -9,7 +9,3 @@ GET HTTP://localhost:8000/students/1234
 POST HTTP://localhost:8000/students
 Content-Type: application/json
 
-{
-    "name": "Brian Barker",
-    "class": "pimping"
-}

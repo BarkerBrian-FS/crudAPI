@@ -1,14 +1,19 @@
 const mongoose = require('mongoose');
 
-const studentSchema = new mongoose.Schema({
+const gameSchema = new mongoose.Schema({
     name:{
         type: String,
         required: true
     },
 
-    class:{
+    genre:{
         type: String,
         required: true
+    },
+
+    company:{
+        type: String,
+        require: true
     },
 
     created_at:{
@@ -18,4 +23,4 @@ const studentSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('Student', studentSchema);
+module.exports = mongoose.model('Game', gameSchema);

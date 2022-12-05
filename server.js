@@ -8,7 +8,7 @@ const app = express();
 
 const PORT = process.env.PORT || 8000;
 
-const studentRouter = require('./routes/students');
+const gameRouter = require('./routes/games');
 
 const DATABASE_URL = process.env.DATABASE_URL;
 
@@ -18,7 +18,7 @@ db.on('error', error => console.error(error));
 db.once('open', () => console.log('Database connection established'));
 
 app.use(express.json());
-app.use('/students', studentRouter);
+app.use('/games', gameRouter);
 
 app.listen(PORT, () => {
     console.log(`Server running on ${PORT}`)
