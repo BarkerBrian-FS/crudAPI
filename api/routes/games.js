@@ -20,17 +20,17 @@ const getGame = async (req, res, next) => {
     next();
 }
 
-//GET ALL
+//GET ALL POSSIBLE ERROR CHECK LATER
 router.get('/', async (req, res) => {
     try{
         const games = Game.find()
-        res.json(games)
+        res.json(res.games)
     } catch(error) {
         res.status(500).json({ message: error.message })
     }
 })
 
-//GET ONE
+//GET ONE 
 router.get('/:id', getGame, async (req, res) => {
     res.json(res.game)
 })
