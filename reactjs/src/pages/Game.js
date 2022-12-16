@@ -17,7 +17,7 @@ function Game() {
 
 
   const API_BASE = process.env.NODE_ENV === 'development' 
-    ? `http://localhost:8000/api/v1` 
+    ? `http://localhost:8000/api/v1/games` 
     : process.env.REACT_APP_BASE_URL;
 
     let ignore = false;
