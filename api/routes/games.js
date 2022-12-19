@@ -1,8 +1,12 @@
 const express = require('express');
+const passport = require('passport-jwt')
+const passportService = require('../services/passport')
+
+const protectedRoute = passport.authenticate('jwt', {session: false})
+
 const router = express.Router();
 
 const Game = require('../models/game')
-
 //Restful Endpoints
 //GET, POST, PATCH, DELETE
 
@@ -21,10 +25,10 @@ const getGame = async (req, res, next) => {
 }
 
 //GET ALL POSSIBLE ERROR CHECK LATER
-router.get('/', async (req, res) => {
+router.get('/', protectedRoute, async (req, res) => {
     try{
-        const games = Game.find()
-        res.json(res.games)
+        const games = await Game.find()
+        res.json(games)
     } catch(error) {
         res.status(500).json({ message: error.message })
     }

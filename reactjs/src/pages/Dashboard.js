@@ -1,6 +1,8 @@
 import '../App.css';
 import React, {useEffect, useState} from 'react';
-import { Link, useParams } from 'react-router-dom'
+import { Link, useParams, useNavigate } from 'react-router-dom'
+import AuthService from '../services/auth.service';
+import gamesService from '../services/games.service';
 
 function Dashboard() {
       const [games, setGames] = useState(null)
@@ -13,25 +15,38 @@ function Dashboard() {
         genre: '',
         company: ''
       })
+      const navigate = useNavigate();
 
   const API_BASE = process.env.NODE_ENV === 'development' 
-    ? `http://localhost:8000/api/v1/games` 
+    ? `http://localhost:8000/api/v1` 
     : process.env.REACT_APP_BASE_URL;
 
     let ignore = false;
     useEffect(() => {
-      if(!ignore){
-        getGames();
-      }
-      return () => {
-        ignore = true;
-      }
-    })
+      gamesService.getAllPrivateGames().then(
+        response => {
+          setGames(response.data)
+        },
+        (error) => {
+          console.log('secured page error', error.response)
+          if(error.response && error.response.status == 403){
+            AuthService.logout();
+            navigate('/login')
+          }
+        }
+      )
+      // if(!ignore){
+      //   getGames();
+      // }
+      // return () => {
+      //   ignore = true;
+      // }
+     })
 
     const getGames = async () => {
       setLoading(true)
       try{
-        await fetch(`${API_BASE}/game/${id}`)
+        await fetch(`${API_BASE}/games`)
                     .then(res => res.json())
                     .then(data => {
                       setGames(data)
